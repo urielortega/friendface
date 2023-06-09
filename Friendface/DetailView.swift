@@ -56,7 +56,7 @@ struct DetailView: View {
             }
             
             Section("Friends") {
-                ForEach(user.friends, id: \.id) { friend in
+                ForEach(user.friends) { friend in
                     Text(friend.name)
                 }
             }
