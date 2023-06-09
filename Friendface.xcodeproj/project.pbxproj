@@ -12,6 +12,7 @@
 		A4DA231E2A32459500219E2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4DA231D2A32459500219E2C /* Assets.xcassets */; };
 		A4DA23212A32459500219E2C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4DA23202A32459500219E2C /* Preview Assets.xcassets */; };
 		A4DA23282A325FFA00219E2C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DA23272A325FFA00219E2C /* User.swift */; };
+		A4DA232A2A328F5B00219E2C /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DA23292A328F5B00219E2C /* DetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		A4DA231D2A32459500219E2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A4DA23202A32459500219E2C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A4DA23272A325FFA00219E2C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A4DA23292A328F5B00219E2C /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			children = (
 				A4DA23192A32459400219E2C /* FriendfaceApp.swift */,
 				A4DA231B2A32459400219E2C /* ContentView.swift */,
+				A4DA23292A328F5B00219E2C /* DetailView.swift */,
 				A4DA23272A325FFA00219E2C /* User.swift */,
 				A4DA231D2A32459500219E2C /* Assets.xcassets */,
 				A4DA231F2A32459500219E2C /* Preview Content */,
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4DA232A2A328F5B00219E2C /* DetailView.swift in Sources */,
 				A4DA231C2A32459400219E2C /* ContentView.swift in Sources */,
 				A4DA231A2A32459400219E2C /* FriendfaceApp.swift in Sources */,
 				A4DA23282A325FFA00219E2C /* User.swift in Sources */,

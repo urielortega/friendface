@@ -13,17 +13,24 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List(users) { user in
-                VStack(alignment: .leading) {
-                    Text(user.name)
-                        .font(.headline)
-                    Text(user.isActive ? "Online 👋🏼" : "Offline 💤")
+                NavigationLink {
+                    DetailView(user: user)
+                } label: {
+                    VStack(alignment: .leading) {
+                        Text(user.name)
+                            .font(.headline)
+                        Text(user.isActive ? "Online 👋🏼" : "Offline 💤")
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(3)
                 }
-                .padding(3)
             }
             .navigationTitle("Friendface")
         }
         .task {
-            await loadData()
+            if users.isEmpty {
+                await loadData()
+            }
         }
     }
     

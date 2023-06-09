@@ -25,7 +25,7 @@ struct User: Codable, Identifiable {
     var tags: [String]
     var friends: [Friend]
     
-    var formattedRegisteredDate: String {
+    var formattedRegisterDate: String {
         registered.formatted(date: .abbreviated, time: .omitted)
     }
 }
