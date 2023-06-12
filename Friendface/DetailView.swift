@@ -23,7 +23,7 @@ struct AttributeRow: View {
 }
 
 struct DetailView: View {
-    let user: User
+    let user: CachedUser
     
     struct Attribute {
         let label: String
@@ -33,10 +33,10 @@ struct DetailView: View {
     var attributes: [Attribute] {
         [
             Attribute(label: "Age", value: String(user.age)),
-            Attribute(label: "Company", value: user.company),
-            Attribute(label: "Email", value: user.email),
-            Attribute(label: "Address", value: user.address),
-            Attribute(label: "About", value: user.about),
+            Attribute(label: "Company", value: user.wrappedCompany),
+            Attribute(label: "Email", value: user.wrappedEmail),
+            Attribute(label: "Address", value: user.wrappedAddress),
+            Attribute(label: "About", value: user.wrappedAbout),
             Attribute(label: "Registered on", value: user.formattedRegisterDate),
         ]
     }
@@ -50,17 +50,17 @@ struct DetailView: View {
             }
             
             Section("Tags") {
-                ForEach(user.tags, id: \.self) { tag in
+                ForEach((user.tags?.components(separatedBy: ","))!, id: \.self) { tag in
                     Text(tag)
                 }
             }
             
             Section("Friends") {
-                ForEach(user.friends) { friend in
-                    Text(friend.name)
+                ForEach(user.friendsArray) { friend in
+                    Text(friend.wrappedName)
                 }
             }
         }
-        .navigationTitle(user.name + (user.isActive ? " 👋🏼" : " 💤"))
+        .navigationTitle(user.wrappedName + (user.isActive ? " 👋🏼" : " 💤"))
     }
 }

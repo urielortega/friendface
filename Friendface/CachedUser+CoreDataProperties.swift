@@ -60,7 +60,7 @@ extension CachedUser {
         tags ?? "Unknown Tags"
     }
     
-    public var friendArray: [CachedFriend] {
+    public var friendsArray: [CachedFriend] {
         let set = friends as? Set<CachedFriend> ?? [] // If the conversion to Set<CachedFriend> fails, return an empty set.
         
         return set.sorted {

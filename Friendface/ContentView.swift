@@ -9,27 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
-    @State private var users = [User]()
+    // @State private var users = [User]()
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var users: FetchedResults<CachedUser>
     
     var body: some View {
         NavigationStack {
-            Group {
-                if users.isEmpty {
-                    Text("No data available")
-                } else {
-                    List(users) { user in
-                        NavigationLink {
-                            DetailView(user: user)
-                        } label: {
-                            VStack(alignment: .leading) {
-                                Text(user.name)
-                                    .font(.headline)
-                                Text(user.isActive ? "Online 👋🏼" : "Offline 💤")
-                                    .foregroundColor(.secondary)
-                            }
-                            .padding(3)
-                        }
+            List(users) { user in
+                NavigationLink {
+                    DetailView(user: user)
+                } label: {
+                    VStack(alignment: .leading) {
+                        Text(user.wrappedName)
+                            .font(.headline)
+                        Text(user.isActive ? "Online 👋🏼" : "Offline 💤")
+                            .foregroundColor(.secondary)
                     }
+                    .padding(3)
                 }
             }
             .navigationTitle("Friendface")
@@ -53,7 +48,7 @@ struct ContentView: View {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
             
-            users = try decoder.decode([User].self, from: data)
+            let users = try decoder.decode([User].self, from: data)
             
             await MainActor.run {
                 updateCache(with: users)
