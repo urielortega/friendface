@@ -9,11 +9,11 @@ import Foundation
 
 struct User: Codable, Identifiable {
     struct Friend: Codable, Identifiable {
-        var id: String
+        var id: UUID
         var name: String
     }
     
-    var id: String
+    var id: UUID
     var isActive: Bool
     var name: String
     var age: Int
