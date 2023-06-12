@@ -12,36 +12,39 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            List(users) { user in
-                NavigationLink {
-                    DetailView(user: user)
-                } label: {
-                    VStack(alignment: .leading) {
-                        Text(user.name)
-                            .font(.headline)
-                        Text(user.isActive ? "Online 👋🏼" : "Offline 💤")
-                            .foregroundColor(.secondary)
+            Group {
+                if users.isEmpty {
+                    Text("No data available")
+                } else {
+                    List(users) { user in
+                        NavigationLink {
+                            DetailView(user: user)
+                        } label: {
+                            VStack(alignment: .leading) {
+                                Text(user.name)
+                                    .font(.headline)
+                                Text(user.isActive ? "Online 👋🏼" : "Offline 💤")
+                                    .foregroundColor(.secondary)
+                            }
+                            .padding(3)
+                        }
                     }
-                    .padding(3)
                 }
             }
             .navigationTitle("Friendface")
         }
         .task {
-            if users.isEmpty {
-                await loadData()
-            }
+            await loadData()
         }
     }
     
     func loadData() async {
-        // Creating the URL we want to read.
-        guard let url = URL(string: "https://www.hackingwithswift.com/samples/friendface.json") else {
-            print("Invalid URL")
-            return
-        }
+        guard users.isEmpty else { return }
         
         do {
+            // Creating the URL we want to read.
+            let url = URL(string: "https://www.hackingwithswift.com/samples/friendface.json")!
+            
             // Fetching the data for the URL.
             let (data, _) = try await URLSession.shared.data(from: url)
             

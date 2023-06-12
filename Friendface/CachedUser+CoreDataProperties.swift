@@ -2,7 +2,7 @@
 //  CachedUser+CoreDataProperties.swift
 //  Friendface
 //
-//  Created by Uriel Ortega on 10/06/23.
+//  Created by Uriel Ortega on 12/06/23.
 //
 //
 
@@ -16,22 +16,18 @@ extension CachedUser {
         return NSFetchRequest<CachedUser>(entityName: "CachedUser")
     }
 
-    @NSManaged public var id: String?
-    @NSManaged public var isActive: Bool
-    @NSManaged public var name: String?
+    @NSManaged public var about: String?
+    @NSManaged public var address: String?
     @NSManaged public var age: Int16
     @NSManaged public var company: String?
     @NSManaged public var email: String?
-    @NSManaged public var address: String?
-    @NSManaged public var about: String?
+    @NSManaged public var id: UUID?
+    @NSManaged public var isActive: Bool
+    @NSManaged public var name: String?
     @NSManaged public var registered: Date?
     @NSManaged public var tags: String?
-    @NSManaged public var friend: NSSet?
-    
-    public var wrappedId: String {
-        id ?? "Unknown Id"
-    }
-    
+    @NSManaged public var friends: NSSet?
+
     public var wrappedName: String {
         name ?? "Unknown Name"
     }
@@ -52,34 +48,41 @@ extension CachedUser {
         about ?? "Unknown About Information"
     }
     
-    public var wrappedRegisterDate: String {
+    public var wrappedRegisterDate: Date {
+        registered ?? Date.now
+    }
+    
+    public var formattedRegisterDate: String {
         registered?.formatted(date: .abbreviated, time: .omitted) ?? "Unknown Register Date"
     }
     
+    public var wrappedTags: String {
+        tags ?? "Unknown Tags"
+    }
+    
     public var friendArray: [CachedFriend] {
-        let set = friend as? Set<CachedFriend> ?? [] // If the conversion to Set<CachedFriend> fails, return an empty set.
+        let set = friends as? Set<CachedFriend> ?? [] // If the conversion to Set<CachedFriend> fails, return an empty set.
         
         return set.sorted {
             $0.wrappedName < $1.wrappedName
         }
     }
-
 }
 
-// MARK: Generated accessors for friend
+// MARK: Generated accessors for friends
 extension CachedUser {
 
-    @objc(addFriendObject:)
-    @NSManaged public func addToFriend(_ value: CachedFriend)
+    @objc(addFriendsObject:)
+    @NSManaged public func addToFriends(_ value: CachedFriend)
 
-    @objc(removeFriendObject:)
-    @NSManaged public func removeFromFriend(_ value: CachedFriend)
+    @objc(removeFriendsObject:)
+    @NSManaged public func removeFromFriends(_ value: CachedFriend)
 
-    @objc(addFriend:)
-    @NSManaged public func addToFriend(_ values: NSSet)
+    @objc(addFriends:)
+    @NSManaged public func addToFriends(_ values: NSSet)
 
-    @objc(removeFriend:)
-    @NSManaged public func removeFromFriend(_ values: NSSet)
+    @objc(removeFriends:)
+    @NSManaged public func removeFromFriends(_ values: NSSet)
 
 }
 

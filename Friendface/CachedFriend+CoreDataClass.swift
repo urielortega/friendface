@@ -2,7 +2,7 @@
 //  CachedFriend+CoreDataClass.swift
 //  Friendface
 //
-//  Created by Uriel Ortega on 10/06/23.
+//  Created by Uriel Ortega on 12/06/23.
 //
 //
 
